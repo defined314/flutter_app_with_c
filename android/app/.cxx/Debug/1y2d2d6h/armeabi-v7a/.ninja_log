@@ -1,0 +1,18 @@
+# ninja log v5
+2	323	7518805332253263	CMakeFiles/native.dir/C_/Users/ASUS/Documents/flutter_study/flutter_app_with_c/native/native.cpp.o	b3c7392e0ef0cf82
+323	411	7518805333209627	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
+3	441	7519056480473765	CMakeFiles/native.dir/C_/Users/ASUS/Documents/flutter_study/flutter_app_with_c/native/native.cpp.o	b3c7392e0ef0cf82
+442	575	7519056481856215	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
+2	433	7519062301249886	CMakeFiles/native.dir/C_/Users/ASUS/Documents/flutter_study/flutter_app_with_c/native/native.cpp.o	b3c7392e0ef0cf82
+435	553	7519062302523168	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
+1	321	7519538374639217	CMakeFiles/native.dir/C_/Users/ASUS/Documents/flutter_study/flutter_app_with_c/native/native.cpp.o	b3c7392e0ef0cf82
+321	451	7519538375933920	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
+1	329	7519579100609731	CMakeFiles/native.dir/C_/Users/ASUS/Documents/flutter_study/flutter_app_with_c/native/native.cpp.o	b3c7392e0ef0cf82
+329	440	7519579101740943	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
+2	358	7519585591610147	CMakeFiles/native.dir/C_/Users/ASUS/Documents/flutter_study/flutter_app_with_c/native/native.cpp.o	b3c7392e0ef0cf82
+358	462	7519585592667913	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
+2	320	7519586516818650	CMakeFiles/native.dir/C_/Users/ASUS/Documents/flutter_study/flutter_app_with_c/native/native.cpp.o	b3c7392e0ef0cf82
+320	433	7519586517972940	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
+2	427	7519661544578733	CMakeFiles/native.dir/C_/Users/ASUS/Documents/flutter_study/flutter_app_with_c/native/native.cpp.o	b3c7392e0ef0cf82
+428	544	7519661545702515	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
+1	109	7519666826607346	C:/Users/ASUS/Documents/flutter_study/flutter_app_with_c/build/app/intermediates/cxx/Debug/1y2d2d6h/obj/armeabi-v7a/libnative.so	1475db8e557abf1c
