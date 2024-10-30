@@ -36,6 +36,10 @@ final int Function(int x, int y) nativeSimpleMultiple =
 nativeLib.lookup<NativeFunction<Int32 Function(Int32, Int32)>>("simpleMultiple").asFunction();
 final void Function(Pointer<Int32>) nativeAddPointer =
 nativeLib.lookup<NativeFunction<Void Function(Pointer<Int32>)>>("addPointer").asFunction();
+
+final int Function() nativeMinusCountCpp =
+nativeLib.lookup<NativeFunction<Int32 Function()>>("minusCountCpp").asFunction();
+
 final void Function() nativeSayHello =
 nativeLib.lookup<NativeFunction<Void Function()>>("say_hello").asFunction();
 final Pointer<Utf8> Function() nativeSayWorld =
@@ -47,6 +51,9 @@ final Place Function(Pointer<Utf8> name, double latitude, double longitude) nati
 nativeLib.lookup<NativeFunction<Place Function(Pointer<Utf8>, Double, Double)>>("create_place").asFunction();
 final double Function(Coordinate p1, Coordinate p2) nativeDistance =
 nativeLib.lookup<NativeFunction<Double Function(Coordinate, Coordinate)>>("distance").asFunction();
+
+final Coordinate Function(Coordinate p1) nativeModifyCoordinate =
+nativeLib.lookup<NativeFunction<Coordinate Function(Coordinate)>>("modify_coordinate").asFunction();
 
 
 void main() {
@@ -90,21 +97,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _counter_add = 0;
+  int _counter_minus = 0;
   double _dist = 0.0;
   late Place _placeA;
   late Place _placeB;
+  List<Place> _placeList = [];  // 구조체 배열 테스트용
 
   void _incrementCounter() {
     setState(() {
       Pointer<Int32> pointer = calloc.allocate(4);
-      pointer.value = _counter;
+      pointer.value = _counter_add;
       nativeAddPointer(pointer);
-      _counter = pointer.value;
+      _counter_add = pointer.value;
 
-      nativeSayHello();
-      final message = nativeSayWorld().toDartString();
-      print(message);
+      _counter_minus = nativeMinusCountCpp();
+
+      // nativeSayHello();
+      // final message = nativeSayWorld().toDartString();
+      // print(message);
     });
   }
 
@@ -120,25 +131,34 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _createPlaceA(double latitude, double longitude) {
-    setState(() {
-      print('tried to create placeA');
-      _placeA = _createPlace('placeA', latitude, longitude);
-      _updateDistanceAB();
-    });
+    // print('tried to create placeA');
+    _placeA = _createPlace('placeA', latitude, longitude);
   }
 
   void _createPlaceB(double latitude, double longitude) {
-    setState(() {
-      print('tried to create placeB');
-      _placeB = _createPlace('placeB', latitude, longitude);
-      _updateDistanceAB();
-    });
+    // print('tried to create placeB');
+    _placeB = _createPlace('placeB', latitude, longitude);
   }
 
   void _updateDistanceAB() {
     setState(() {
-      final coordinateA = _placeA.coordinate;
-      final coordinateB = _placeB.coordinate;
+      if (_placeList.length <= 1) {
+        _placeList.add(_placeA);
+        _placeList.add(_placeB);
+      } else {
+        // print('_placeA old: ${_placeList[0].coordinate.latitude},'
+        //     '${_placeList[0].coordinate.longitude}'
+        //     ', _placeB old: ${_placeList[1].coordinate.latitude},'
+        //     '${_placeList[1].coordinate.longitude}');
+        _placeList[0] = _placeA;
+        _placeList[1] = _placeB;
+      }
+      // print('_placeA new: ${_placeList[0].coordinate.latitude},'
+      //     '${_placeList[0].coordinate.longitude}'
+      //     ', _placeB new: ${_placeList[1].coordinate.latitude},'
+      //     '${_placeList[1].coordinate.longitude}');
+      final coordinateA = _placeList[0].coordinate;
+      final coordinateB = _placeList[1].coordinate;
       _dist = nativeDistance(coordinateA, coordinateB);
       print('distance between (${coordinateA.latitude}, ${coordinateA.longitude})'
             ' and (${coordinateB.latitude}, ${coordinateB.longitude}) = $_dist');
@@ -159,28 +179,53 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
+            // cpp에서 pointer 수정
             Text(
-              '$_counter\n',
+              '$_counter_add\n',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const Text(
+              'minus count in cpp:',
+            ),
+            // cpp 내의 변수 수정하여 반환
+            Text(
+              '$_counter_minus\n',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             TextButton(
               onPressed: () {
-                _createPlaceA(1, 2);
+                _createPlaceA(0, 0);
+                _createPlaceB(0, 0);
+                _updateDistanceAB();
               },
               child: Text(
-                'create placeA(1,2)\n',
+                '\ncreate placeA and placeB to (0, 0)\n',
               ),
             ),
             TextButton(
               onPressed: () {
-                _createPlaceB(3, 4);
+                _createPlaceA(7, 9);
+                _createPlaceB(4, 2);
+                _updateDistanceAB();
               },
               child: Text(
-                'create placeB(3,4)\n',
+                'create placeA(7, 9), placeA(4, 2)\n',
               ),
             ),
+            // cpp에서 _place.coordinate의 lat/lon 값 수정
+            TextButton(
+              onPressed: () {
+                _placeA.coordinate =
+                    nativeModifyCoordinate(_placeA.coordinate);
+                _updateDistanceAB();
+              },
+              child: Text(
+                'modify placeA(+1, +1) in cpp\n',
+              ),
+            ),
+            // _placeList 내 coordinate 이용하여 A와 B 사이 거리 확인
             Text(
-                'update distance between placeA and placeB: ',
+                '\ncheck distance between placeA and placeB: ',
             ),
             Text(
                 '$_dist',

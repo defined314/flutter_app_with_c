@@ -9,12 +9,27 @@
 
 
 EXTERNC
+int32_t simpleAdd(int32_t x, int32_t y);
+EXTERNC
+int32_t simpleDiff(int32_t x, int32_t y);
+EXTERNC
+int32_t simpleMultiple(int32_t x, int32_t y);
+EXTERNC
+void addPointer(int32_t* original);
+EXTERNC
+int32_t minusCountCpp();
+
+EXTERNC
+void say_hello();
+EXTERNC
+char *say_world();
+
+EXTERNC
 struct Coordinate
 {
     double latitude;
     double longitude;
 };
-
 EXTERNC
 struct Place
 {
@@ -26,11 +41,8 @@ EXTERNC
 struct Coordinate create_coordinate(double latitude, double longitude);
 EXTERNC
 struct Place create_place(char *name, double latitude, double longitude);
-
 EXTERNC
 double distance(struct Coordinate, struct Coordinate);
 
 EXTERNC
-void say_hello();
-EXTERNC
-char *say_world();
+struct Coordinate modify_coordinate(struct Coordinate c_old);
